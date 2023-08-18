@@ -10,4 +10,5 @@ const signOut = () => {
   firebase.auth().signOut();
 };
 
+
 export { signIn, signOut };
