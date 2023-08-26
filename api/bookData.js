@@ -3,7 +3,6 @@ import client from '../utils/client';
 
 const endpoint = client.databaseURL;
 
-// TODO: GET BOOKS
 const getBooks = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/books.json`, {
     method: 'GET',
@@ -11,7 +10,13 @@ const getBooks = () => new Promise((resolve, reject) => {
       'Content-Type': 'application/json'
     },
   }).then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
     .catch(reject);
 });
 
@@ -26,7 +31,6 @@ const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// TODO: GET SINGLE BOOK
 const getSingleBook = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/books/${firebaseKey}.json`, {
     method: 'GET',
@@ -39,7 +43,6 @@ const getSingleBook = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// TODO: CREATE BOOK
 const createBook = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/books.json`, {
     method: 'POST',
@@ -52,7 +55,6 @@ const createBook = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// TODO: UPDATE BOOK
 const updateBook = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/books/${payload.firebaseKey}.json`, {
     method: 'PATCH',
@@ -77,6 +79,15 @@ const booksOnSale = () => new Promise((resolve, reject) => {
 });
 
 // TODO: STRETCH...SEARCH BOOKS
+const searchBooks = (searchValue) => new Promise((resolve, reject) => {
+  getBooks().then((booksArray) => {
+    const searchResults = booksArray.filter((book) => (
+      book.title.toLowerCase().includes(searchValue)
+      || book.description.toLowerCase().includes(searchValue)
+    ));
+    resolve(searchResults);
+  }).catch(reject);
+});
 
 export {
   getBooks,
@@ -84,5 +95,6 @@ export {
   booksOnSale,
   deleteBook,
   getSingleBook,
-  updateBook
+  updateBook,
+  searchBooks,
 };
