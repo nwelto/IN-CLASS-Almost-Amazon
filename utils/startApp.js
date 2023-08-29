@@ -7,13 +7,13 @@ import formEvents from '../events/formEvents';
 import navigationEvents from '../events/navigationEvents';
 import { emptyBooks, showBooks } from '../pages/books';
 
-const startApp = () => {
+const startApp = (user) => {
   domBuilder();
-  domEvents();
-  formEvents();
+  domEvents(user);
+  formEvents(user);
   navBar();
   logoutButton();
-  navigationEvents();
+  navigationEvents(user);
 
   getBooks().then((array) => {
     if (array.length) {
