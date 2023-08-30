@@ -74,7 +74,10 @@ const booksOnSale = (uid) => new Promise((resolve, reject) => {
       'Content-Type': 'application/json'
     },
   }).then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => {
+      const filteredBooks = Object.values(data).filter((book) => book.sale);
+      resolve(filteredBooks);
+    })
     .catch(reject);
 });
 

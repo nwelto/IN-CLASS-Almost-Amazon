@@ -15,7 +15,7 @@ const startApp = (user) => {
   logoutButton();
   navigationEvents(user);
 
-  getBooks().then((array) => {
+  getBooks(user.uid).then((array) => {
     if (array.length) {
       showBooks(array);
     } else {

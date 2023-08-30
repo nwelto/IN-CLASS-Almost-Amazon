@@ -60,11 +60,6 @@ const domEvents = (user) => {
     if (e.target.id.includes('add-author-btn')) {
       addAuthorForm(user.uid);
     }
-
-    if (e.target.id.includes('edit-author-btn')) {
-      const [, firebaseKey] = e.target.id.split('--');
-      getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj));
-    }
   });
 };
 
