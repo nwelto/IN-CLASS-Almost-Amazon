@@ -9,11 +9,11 @@ import { emptyBooks, showBooks } from '../pages/books';
 
 const startApp = (user) => {
   domBuilder();
+  navBar();
   domEvents(user);
   formEvents(user);
-  navBar();
-  logoutButton();
   navigationEvents(user);
+  logoutButton();
 
   getBooks(user.uid).then((array) => {
     if (array.length) {
