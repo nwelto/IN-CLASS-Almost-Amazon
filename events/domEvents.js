@@ -20,7 +20,7 @@ const domEvents = (user) => {
     }
 
     if (e.target.id.includes('add-book-btn')) {
-      addBookForm(user.includes);
+      addBookForm(user.uid);
     }
 
     if (e.target.id.includes('edit-book-btn')) {
