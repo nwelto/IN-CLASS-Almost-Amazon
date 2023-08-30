@@ -2,6 +2,9 @@ import clearDom from '../utils/clearDom';
 import renderToDOM from '../utils/renderToDom';
 
 const emptyBooks = () => {
+  const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
+  renderToDOM('#add-button', btnString);
+
   const domString = '<h1>No Books Found</h1>';
   renderToDOM('#store', domString);
 };
